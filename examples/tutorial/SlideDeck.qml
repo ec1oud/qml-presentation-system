@@ -250,6 +250,11 @@ CodeSlide {
         sourceFile: "RotatingRectangle.qml"
     }
 
+    QmlCodeSlide {
+        title: "Show a Qt Example"
+        qtSourceModule: "qtdeclarative"
+        sourceFile: "examples/quick/animation/pathanimation/pathanimation.qml"
+    }
 
     Slide {
         title: "Features"

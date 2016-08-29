@@ -49,6 +49,7 @@ Slide {
     property string sourceFile;
     // or directly set the code here
     property string code: helper.contentWithoutComments;
+    property alias qtSourceModule: helper.qtSourceModule
 
     property string codeFontFamily: parent.codeFontFamily;
     property real codeFontSize: baseFontSize * 0.6;

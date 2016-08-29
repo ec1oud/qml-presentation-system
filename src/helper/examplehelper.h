@@ -51,12 +51,14 @@ class ExampleHelper: public QObject
     Q_PROPERTY(QString content READ content NOTIFY contentChanged)
     Q_PROPERTY(QString contentWithoutComments READ contentWithoutComments NOTIFY contentChanged)
     Q_PROPERTY(QString sourcePath READ sourcePath NOTIFY sourcePathChanged)
+    Q_PROPERTY(QString qtSourceModule READ qtSourceModule WRITE setQtSourceModule NOTIFY qtSourceModuleChanged)
 
 public:
     QString source() const { return m_source; }
     QString sourcePath() const { return m_sourcePath; }
     QString content() const { return m_content; }
     QString contentWithoutComments() const { return m_contentWithoutComments; }
+    QString qtSourceModule() const { return m_qtSourceModule; }
 
 public slots:
     void setSource(const QString &path)
@@ -67,13 +69,53 @@ public slots:
         m_source = path;
         emit sourceChanged(path);
 
-        QFile file(path);
+        load();
+    }
+
+    void setQtSourceModule(QString qtSourceModule)
+    {
+        if (m_qtSourceModule == qtSourceModule)
+            return;
+
+        m_qtSourceModule = qtSourceModule;
+        emit qtSourceModuleChanged(qtSourceModule);
+
+        load();
+    }
+
+signals:
+    void sourceChanged(const QUrl &arg);
+    void sourcePathChanged(const QUrl &arg);
+    void contentChanged(const QString &arg);
+    void qtSourceModuleChanged(QString qtSourceModule);
+
+protected:
+    void load() {
+        if (m_source.isEmpty())
+            return; // it wasn't set yet; maybe qtSourceModule was set first
+        QString prefix;
+        if (!m_qtSourceModule.isEmpty()) {
+            static const QString qtSrcDir = qgetenv("QTSRCDIR");
+            if (qtSrcDir.isEmpty()) {
+                qWarning("QTSRCDIR isn't set; you need to use qtchooser to select a Qt version when you use ExampleHelper.qtSourceModule");
+            } else {
+                QDir dir(qtSrcDir);
+                dir.cdUp();
+                if (!dir.cd(m_qtSourceModule))
+                    qWarning() << "failed to find directory for" << m_qtSourceModule;
+                else
+                    prefix = dir.absolutePath() + QDir::separator();
+            }
+        }
+
+        m_sourcePath = QFileInfo(prefix + m_source).absoluteFilePath();
+
+        QFile file(m_sourcePath);
         if (!file.open(QFile::ReadOnly)) {
-            qWarning() << "Could not read file: " << path;
+            qWarning() << "Could not read file:" << m_sourcePath;
             return;
         }
 
-        m_sourcePath = QFileInfo(m_source).absoluteFilePath();
         emit sourcePathChanged(m_sourcePath);
 
         m_content = QString::fromUtf8(file.readAll());
@@ -81,12 +123,6 @@ public slots:
         emit contentChanged(m_content);
     }
 
-signals:
-    void sourceChanged(const QUrl &arg);
-    void sourcePathChanged(const QUrl &arg);
-    void contentChanged(const QString &arg);
-
-protected:
     void stripComments() {
         // TODO configurable to strip specific comment types: one-liners, doc comments, block comments, copyright etc.
         // for now we strip C-style comments but not double-slash comments
@@ -113,6 +149,7 @@ protected:
     QString m_sourcePath;
     QString m_content;
     QString m_contentWithoutComments;
+    QString m_qtSourceModule;
 };
 
 #endif
