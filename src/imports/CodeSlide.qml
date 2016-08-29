@@ -53,6 +53,8 @@ Slide {
     property string codeFontFamily: parent.codeFontFamily;
     property real codeFontSize: baseFontSize * 0.6;
 
+    property alias __helper: helper
+
     Rectangle {
         id: background
         anchors.fill: parent

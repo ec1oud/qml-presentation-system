@@ -49,6 +49,7 @@ Presentation
 
     width: 1280
     height: 720
+    arrowNavigation: false
 
     SlideCounter {}
     Clock {}
@@ -238,6 +239,11 @@ CodeSlide {
                 drag.target: box
             }
         }
+    }
+
+    QmlCodeSlide {
+        title: "Show Code with Interactive Content"
+        sourceFile: "RotatingRectangle.qml"
     }
 
 
