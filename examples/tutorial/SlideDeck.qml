@@ -213,7 +213,11 @@ CodeSlide {
         ]
     }
 
-
+    ImageSlide {
+        title: "ImageSlide {} Element"
+        source: "images/qtlogo-64.png"
+//        autoScale: true
+    }
 
     Slide {
         id: interactiveSlide
