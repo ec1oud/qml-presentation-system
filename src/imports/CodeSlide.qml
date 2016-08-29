@@ -1,7 +1,7 @@
 /****************************************************************************
 **
-** Copyright (C) 2012 Digia Plc and/or its subsidiary(-ies).
-** Contact: http://www.qt-project.org/legal
+** Copyright (C) 2016 The Qt Company Ltd.
+** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of the QML Presentation System.
 **
@@ -39,17 +39,19 @@
 **
 ****************************************************************************/
 
-
-import QtQuick 2.0
+import QtQuick 2.5
+import Qt.labs.presentation.helper 1.0
 
 Slide {
     id: slide;
 
+    // Either set an example file
+    property string sourceFile;
+    // or directly set the code here
+    property string code: helper.content;
+
     property string codeFontFamily: parent.codeFontFamily;
-    property string code;
     property real codeFontSize: baseFontSize * 0.6;
-
-
 
     Rectangle {
         id: background
@@ -75,12 +77,9 @@ Slide {
         }
     }
 
-
-
     ListModel {
         id: listModel
     }
-
 
     onVisibleChanged: {
         listView.focus = slide.visible;
@@ -130,7 +129,6 @@ Slide {
                 font.pixelSize: slide.codeFontSize
                 font.bold: itemDelegate.ListView.isCurrentItem;
                 opacity: itemDelegate.ListView.isCurrentItem ? 1 : 0.9;
-
             }
 
             Rectangle {
@@ -157,6 +155,8 @@ Slide {
         }
     }
 
-
-
+    ExampleHelper {
+        id: helper
+        source: slide.visible ? sourceFile : ""
+    }
 }
