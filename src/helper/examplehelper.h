@@ -51,26 +51,10 @@ class ExampleHelper: public QObject
     Q_PROPERTY(QString content READ content NOTIFY contentChanged)
     Q_PROPERTY(QString sourcePath READ sourcePath NOTIFY sourcePathChanged)
 
-    QString m_source;
-    QString m_content;
-    QString m_sourcePath;
-
 public:
-
-    QString source() const
-    {
-        return m_source;
-    }
-
-    QString sourcePath() const
-    {
-        return m_sourcePath;
-    }
-
-    QString content() const
-    {
-        return m_content;
-    }
+    QString source() const { return m_source; }
+    QString sourcePath() const { return m_sourcePath; }
+    QString content() const { return m_content; }
 
 public slots:
     void setSource(const QString &path)
@@ -98,6 +82,11 @@ signals:
     void sourceChanged(const QUrl &arg);
     void sourcePathChanged(const QUrl &arg);
     void contentChanged(const QString &arg);
+
+protected:
+    QString m_source;
+    QString m_sourcePath;
+    QString m_content;
 };
 
 #endif
