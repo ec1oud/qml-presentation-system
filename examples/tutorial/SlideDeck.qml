@@ -190,6 +190,19 @@ int main(int argc, char **argv) {
 \" "
     }
 
+    CodeSlide {
+        title: "CodeSlide with sourceFile"
+        code:
+"
+CodeSlide {
+    title: \"CodeSlide {} Element\"
+    sourceFile: \"ExternalCode.qml\"
+}
+
+// Loads pre-existing code for review
+"
+    }
+
     Slide {
         title: "Font size relative to screen size"
         content: [
@@ -240,24 +253,7 @@ int main(int argc, char **argv) {
 
     CodeSlide {
         title: "Slide Counter"
-        code:
-"Presentation {
-
-    SlideCounter {
-        // Defaults:
-        // anchors.right: parent.right
-        // anchors.bottom: parent.bottom
-        // anchors.margins: fontSize;
-        // textColor: 'black'
-        // fontFamily: 'Helvetica' (from presentation)
-        // fontScale: 0.5;
-        }
-    }
-
-    Slide {
-        ...
-    }
-}"
+        sourceFile: "ExternalCode.qml"
     }
 
     CodeSlide {
