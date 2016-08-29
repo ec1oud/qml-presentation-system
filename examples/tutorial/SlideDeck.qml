@@ -192,11 +192,15 @@ int main(int argc, char **argv) {
     }
 
     CodeSlide {
-        title: "CodeSlide with sourceFile"
+        title: "CodeSlide with sourceFile and different background"
+        background: Rectangle { color: "lightsteelblue" }
+        margins: -20
         code:
 "
 CodeSlide {
     title: \"CodeSlide {} Element\"
+    background: Rectangle { color: \"lightsteelblue\" }
+    margins: -20
     sourceFile: \"ExternalCode.qml\"
 }
 
