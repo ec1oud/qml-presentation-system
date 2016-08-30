@@ -72,7 +72,7 @@ Item {
     property string notes;
 
     property real fontSize: parent.height * 0.05
-    property real fontScale: 1
+    property real fontScale: parent.fontScale
 
     property real baseFontSize: fontSize * fontScale
     property real titleFontSize: fontSize * 1.2 * fontScale

@@ -58,6 +58,7 @@ Item {
     property color titleColor: textColor;
     property color textColor: "black"
     property string fontFamily: "Helvetica"
+    property real fontScale: 1
     property string codeFontFamily: "Courier New"
 
     // Private API
