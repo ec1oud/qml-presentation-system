@@ -68,6 +68,7 @@ Item {
     property string title;
     property variant content: []
     property string centeredText
+    property alias centeredTextFormat: centeredId.textFormat
     property string writeInText;
     property string notes;
 
