@@ -42,6 +42,7 @@
 
 import QtQuick 2.5
 import QtQuick.Window 2.0
+import QtGraphicalEffects 1.0
 
 Item {
     id: root
@@ -186,67 +187,99 @@ Item {
 
     Window {
         id: notesWindow;
-        width: 400
-        height: 300
+        width: 1200
+        height: 800
 
         title: "QML Presentation: Notes"
         visible: root.showNotes
 
-        Flickable {
+        Row {
             anchors.fill: parent
-            contentWidth: parent.width
-            contentHeight: textContainer.height
 
-            Item {
-                id: textContainer
-                width: parent.width
-                height: notesText.height + 2 * notesText.padding
+            Flickable {
+                width: parent.width - thumbnail.width
+                height: parent.height
+                contentWidth: width
+                contentHeight: textContainer.height
 
-                Text {
-                    id: notesText
+                Item {
+                    id: textContainer
+                    width: parent.width
+                    height: notesText.height + 2 * notesText.padding
 
-                    property real padding: 16;
+                    Text {
+                        id: notesText
 
-                    x: padding
-                    y: padding
-                    width: parent.width - 2 * padding
+                        property real padding: 16;
+
+                        x: padding
+                        y: padding
+                        width: parent.width - 2 * padding
 
 
-                    font.pixelSize: 16
-                    wrapMode: Text.WordWrap
+                        font.pixelSize: 16
+                        wrapMode: Text.WordWrap
 
-                    property string notes: root.slides[root.currentSlide].notes;
+                        property string notes: root.slides[root.currentSlide].notes;
 
-                    onNotesChanged: {
-                        var result = "";
+                        onNotesChanged: {
+                            var result = "";
 
-                        var lines = notes.split("\n");
-                        var beginNewLine = false
-                        for (var i=0; i<lines.length; ++i) {
-                            var line = lines[i].trim();
-                            if (line.length == 0) {
-                                beginNewLine = true;
-                            } else {
-                                if (beginNewLine && result.length) {
-                                    result += "\n\n"
-                                    beginNewLine = false
+                            var lines = notes.split("\n");
+                            var beginNewLine = false
+                            for (var i=0; i<lines.length; ++i) {
+                                var line = lines[i].trim();
+                                if (line.length == 0) {
+                                    beginNewLine = true;
+                                } else {
+                                    if (beginNewLine && result.length) {
+                                        result += "\n\n"
+                                        beginNewLine = false
+                                    }
+                                    if (result.length > 0)
+                                        result += " ";
+                                    result += line;
                                 }
-                                if (result.length > 0)
-                                    result += " ";
-                                result += line;
                             }
-                        }
 
-                        if (result.length == 0) {
-                            font.italic = true;
-                            text = "no notes.."
-                        } else {
-                            font.italic = false;
-                            text = result;
+                            if (result.length == 0) {
+                                font.italic = true;
+                                text = "no notes.."
+                            } else {
+                                font.italic = false;
+                                text = result;
+                            }
                         }
                     }
                 }
             }
+
+            BrightnessContrast {
+                id: thumbnail
+                source: root.slides[currentSlide]
+                width: 640; height: 360
+
+                Rectangle {
+                    color: "transparent"
+                    border.color: "black"
+                    anchors.fill: thumbnail
+                }
+            }
+
+            // navigate with arrow keys
+            Shortcut { sequence: StandardKey.MoveToNextLine; enabled: root.arrowNavigation; onActivated: goToNextSlide() }
+            Shortcut { sequence: StandardKey.MoveToPreviousLine; enabled: root.arrowNavigation; onActivated: goToPreviousSlide() }
+            Shortcut { sequence: StandardKey.MoveToNextChar; enabled: root.arrowNavigation; onActivated: goToNextSlide() }
+            Shortcut { sequence: StandardKey.MoveToPreviousChar; enabled: root.arrowNavigation; onActivated: goToPreviousSlide() }
+
+            // presentation-specific single-key shortcuts (which interfere with normal typing)
+            Shortcut { sequence: " "; enabled: root.keyShortcutsEnabled; onActivated: goToNextSlide() }
+            Shortcut { sequence: "c"; enabled: root.keyShortcutsEnabled; onActivated: root._faded = !root._faded }
+
+            // standard shortcuts
+            Shortcut { sequence: StandardKey.MoveToNextPage; onActivated: goToNextSlide() }
+            Shortcut { sequence: StandardKey.MoveToPreviousPage; onActivated: goToPreviousSlide() }
+            Shortcut { sequence: StandardKey.Quit; onActivated: Qt.quit() }
         }
     }
 }
