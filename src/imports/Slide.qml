@@ -49,6 +49,7 @@ Item {
      */
 
     id: slide
+    objectName: title
 
     property bool isSlide: true;
 
