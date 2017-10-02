@@ -80,13 +80,10 @@ Item {
     property real titleFontSize: fontSize * 1.2 * fontScale
     property real bulletSpacing: 1
 
-    property real contentWidth: width
+    property real contentWidth: contentArea.width
 
-    // Define the slide to be the "content area"
-//    x: parent.width * 0.05
-//    y: parent.height * 0.2
-    width: parent.width //* 0.9
-    height: parent.height //* 0.7
+    width: parent.width
+    height: parent.height
 
     property real masterWidth: parent.width
     property real masterHeight: parent.height
@@ -100,26 +97,25 @@ Item {
     layer.enabled: true
     layer.sourceRect: Qt.rect(-x, -y, parent.width, parent.height)
 
+    Text {
+        id: titleText
+        font.pixelSize: titleFontSize
+        text: title;
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: parent.top
+        font.bold: true;
+        font.family: slide.fontFamily
+        color: slide.titleColor
+        horizontalAlignment: Text.Center
+        z: 1
+    }
+
     Item {
-        id: content
+        id: contentArea
         x: parent.width * 0.05
         y: parent.height * 0.2
-        width: parent.width //* 0.9
-        height: parent.height //* 0.7
-
-        Text {
-            id: titleText
-            font.pixelSize: titleFontSize
-            text: title;
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.bottom: parent.top
-            anchors.bottomMargin: parent.fontSize * 1.5
-            font.bold: true;
-            font.family: slide.fontFamily
-            color: slide.titleColor
-            horizontalAlignment: Text.Center
-            z: 1
-        }
+        width: parent.width * 0.9
+        height: parent.height * 0.7
 
         Text {
             id: centeredId
@@ -156,9 +152,8 @@ Item {
             visible: slide.writeInText != undefined;
         }
 
-
         Column {
-            id: contentId
+            id: bulletPointsColumn
             anchors.fill: parent
 
             Repeater {
@@ -167,7 +162,7 @@ Item {
                 Row {
                     id: row
 
-                    function decideIndentLevel(s) { return s.charAt(0) == " " ? 1 + decideIndentLevel(s.substring(1)) : 0 }
+                    function decideIndentLevel(s) { return s.charAt(0) === " " ? 1 + decideIndentLevel(s.substring(1)) : 0 }
                     property int indentLevel: decideIndentLevel(content[index])
                     property int nextIndentLevel: index < content.length - 1 ? decideIndentLevel(content[index+1]) : 0
                     property real indentFactor: (10 - row.indentLevel * 2) / 10;
