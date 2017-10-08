@@ -55,6 +55,7 @@ Slide {
     property string codeFontFamily: parent.codeFontFamily;
     property real codeFontSize: baseFontSize * 0.6;
     property real margins: 6
+    property real rightMargin: 300
 
     property alias __helper: helper
 
@@ -101,12 +102,22 @@ Slide {
         listView.currentIndex = -1;
     }
 
+    Rectangle {
+        color: "#11111111"
+        width: 1
+        anchors {
+            left: listView.right
+            top: listView.top
+            bottom: listView.bottom
+        }
+    }
+
     ListView {
         id: listView;
 
         anchors.fill: parent;
         anchors.margins: slide.margins
-        clip: true
+        anchors.rightMargin: slide.rightMargin
 
         model: listModel;
         focus: true;
@@ -124,7 +135,7 @@ Slide {
             id: itemDelegate
 
             height: lineLabel.height
-            width: parent.width
+            width: slide.width
 
             Rectangle {
                 id: lineLabelBackground
@@ -158,7 +169,7 @@ Slide {
                 id: lineContent
                 anchors.left: lineLabelBackground.right
                 anchors.leftMargin: lineContent.height;
-                anchors.right: parent.right;
+                width: parent.width - x
                 color: slide.textColor;
                 text: code;
                 font.family: slide.codeFontFamily
