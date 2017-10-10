@@ -50,4 +50,9 @@ Presentation {
     CodeSlide {
         sourceFile: "SlideDeck.qml"
     }
+
+    HighlightingCodeSlide {
+        paletteName: "Cute"
+        sourceFile: "SlideDeck.qml"
+    }
 }

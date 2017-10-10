@@ -1,5 +1,7 @@
 CodeSlide 1.0 CodeSlide.qml
+HighlightingCodeSlide 1.0 HighlightingCodeSlide.qml
 ImageSlide 1.0 ImageSlide.qml
+PaletteLoader 1.0 PaletteLoader.qml
 Presentation 1.0 Presentation.qml
 QmlCodeSlide 1.0 QmlCodeSlide.qml
 Slide 1.0 Slide.qml

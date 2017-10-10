@@ -42,6 +42,7 @@
 #include <QtQml/qqmlextensionplugin.h>
 
 #include "examplehelper.h"
+#include "syntaxhighlighter.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -56,6 +57,7 @@ public:
         Q_UNUSED(uri);
 
         qmlRegisterType<ExampleHelper>(uri, 1, 0, "ExampleHelper");
+        qmlRegisterType<SyntaxHighlighter>(uri, 1, 0, "SyntaxHighlighter");
     }
 };
 
