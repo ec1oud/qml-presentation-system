@@ -60,7 +60,7 @@ Slide {
 
     property alias paletteName: paletteLoader.name
     property alias palette: paletteLoader.palette
-    property alias tabStopDistance: textEdit.tabStopDistance
+    property alias tabStopDistance: editor.tabStopDistance
 
     PaletteLoader {
         id: paletteLoader
@@ -93,29 +93,36 @@ Slide {
     }
 
     onVisibleChanged: {
-        textEdit.focus = slide.visible;
+        editor.focus = slide.visible;
     }
 
     Rectangle {
         color: "#11111111"
         width: 1
         anchors {
-            left: textEdit.right
-            top: textEdit.top
-            bottom: textEdit.bottom
+            left: flick.right
+            top: flick.top
+            bottom: flick.bottom
             margins: -12
         }
     }
 
-    TextEdit {
-        id: textEdit
-        anchors.fill: parent;
-        anchors.margins: slide.margins
-        anchors.rightMargin: slide.rightMargin
-        focus: true
-        text: code
-        font.family: codeFontFamily
-        font.pixelSize: codeFontSize
+    Flickable {
+         id: flick
+         anchors.fill: parent
+         anchors.margins: slide.margins
+         anchors.rightMargin: slide.rightMargin
+         contentWidth: editor.paintedWidth
+         contentHeight: editor.paintedHeight
+
+        TextEdit {
+            id: editor
+            anchors.fill: parent;
+            focus: true
+            text: code
+            font.family: codeFontFamily
+            font.pixelSize: codeFontSize
+        }
     }
 
     SyntaxHighlighter {
@@ -134,7 +141,7 @@ Slide {
     }
 
     Component.onCompleted: {
-        syntaxHighlighter.setHighlighter(textEdit)
+        syntaxHighlighter.setHighlighter(editor)
     }
 
     ExampleHelper {
