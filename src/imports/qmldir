@@ -1,10 +1,11 @@
 CodeSlide 1.0 CodeSlide.qml
 HighlightingCodeSlide 1.0 HighlightingCodeSlide.qml
 ImageSlide 1.0 ImageSlide.qml
+LiveCode 1.0 LiveCode.qml
+LiveCodeSlide 1.0 LiveCodeSlide.qml
 PaletteLoader 1.0 PaletteLoader.qml
 Presentation 1.0 Presentation.qml
 QmlCodeSlide 1.0 QmlCodeSlide.qml
 Slide 1.0 Slide.qml
 SlideCounter 1.0 SlideCounter.qml
 Clock 1.0 Clock.qml
-

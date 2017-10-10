@@ -5,6 +5,8 @@ QML_FILES = \
     CodeSlide.qml \
     HighlightingCodeSlide.qml \
     ImageSlide.qml \
+    LiveCode.qml \
+    LiveCodeSlide.qml \
     PaletteLoader.qml \
     palettes/CutePalette.qml \
     palettes/DarkPalette.qml \

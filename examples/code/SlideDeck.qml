@@ -55,4 +55,21 @@ Presentation {
         paletteName: "Cute"
         sourceFile: "SlideDeck.qml"
     }
+
+    LiveCodeSlide {
+        code: "
+            import QtQuick 2.5
+
+            Rectangle {
+                id: rec
+                anchors.fill: parent
+                radius: rec.height * 0.03
+                color: 'tomato'
+                Text {
+                    anchors.centerIn: parent
+                    text: 'tomato'
+                }
+            }
+        "
+    }
 }
