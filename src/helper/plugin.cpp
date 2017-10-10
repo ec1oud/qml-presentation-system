@@ -50,12 +50,16 @@ class QMLPresentationExampleHelperPlugin : public QQmlExtensionPlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface/1.0")
+
 public:
-    virtual void registerTypes(const char *uri)
+    void initializeEngine(QQmlEngine *engine, const char *) override {
+        QMLHighlighter::findSyntaxFiles(engine->importPathList());
+    }
+
+    void registerTypes(const char *uri) override
     {
         Q_ASSERT(QLatin1String(uri) == QLatin1String("Qt.labs.presentation.helper"));
         Q_UNUSED(uri);
-
         qmlRegisterType<ExampleHelper>(uri, 1, 0, "ExampleHelper");
         qmlRegisterType<SyntaxHighlighter>(uri, 1, 0, "SyntaxHighlighter");
     }

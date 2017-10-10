@@ -17,23 +17,34 @@
 ****************************************************************************/
 
 #include "qmlhighlighter.h"
+#include <QDir>
 
-bool QMLHighlighter::m_cacheLoaded = false;
 QSet<QString> QMLHighlighter::m_keywordsCache = QSet<QString>();
 QSet<QString> QMLHighlighter::m_jsIdsCache = QSet<QString>();
 QSet<QString> QMLHighlighter::m_qmlIdsCache = QSet<QString>();
 QSet<QString> QMLHighlighter::m_propertiesCache = QSet<QString>();
 
+
 QMLHighlighter::QMLHighlighter(QTextDocument *parent) : QSyntaxHighlighter(parent)
     , m_markCaseSensitivity(Qt::CaseInsensitive)
 {
-    if (!m_cacheLoaded) {
-        loadDictionary(":/resources/dictionaries/keywords.txt", m_keywordsCache);
-        loadDictionary(":/resources/dictionaries/javascript.txt", m_jsIdsCache);
-        loadDictionary(":/resources/dictionaries/qml.txt", m_qmlIdsCache);
-        loadDictionary(":/resources/dictionaries/properties.txt", m_propertiesCache);
-        m_cacheLoaded = true;
+}
+
+void QMLHighlighter::findSyntaxFiles(QStringList paths)
+{
+    QString filePath;
+    for (const QString p : paths) {
+        QDir d(p);
+        d.cd(QLatin1String("Qt/labs/presentation/dictionaries"));
+        if (d.exists() && d.exists(QLatin1String("keywords.txt"))) {
+            filePath = d.canonicalPath();
+            break;
+        }
     }
+    loadDictionary(filePath + QLatin1String("/keywords.txt"), m_keywordsCache);
+    loadDictionary(filePath + QLatin1String("/javascript.txt"), m_jsIdsCache);
+    loadDictionary(filePath + QLatin1String("/qml.txt"), m_qmlIdsCache);
+    loadDictionary(filePath + QLatin1String("/properties.txt"), m_propertiesCache);
 }
 
 void QMLHighlighter::setColor(ColorComponent component, const QColor &color)

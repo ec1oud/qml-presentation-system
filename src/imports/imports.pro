@@ -15,6 +15,10 @@ QML_FILES = \
     Presentation.qml \
     QmlCodeSlide.qml \
     Slide.qml \
-    SlideCounter.qml
+    SlideCounter.qml \
+    dictionaries/javascript.txt \
+    dictionaries/keywords.txt \
+    dictionaries/properties.txt \
+    dictionaries/qml.txt
 
 load(qml_module)

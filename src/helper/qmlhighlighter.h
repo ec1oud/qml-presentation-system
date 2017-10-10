@@ -46,12 +46,13 @@ public:
     void addQmlComponent(QString componentName);
     void addJsComponent(QString componentName);
 
+    static void findSyntaxFiles(QStringList paths);
+
 protected:
     void highlightBlock(const QString &text);
 
 private:
-    void loadDictionary(QString filepath, QSet<QString> &dictionary);
-    static bool m_cacheLoaded;
+    static void loadDictionary(QString filepath, QSet<QString> &dictionary);
     static QSet<QString> m_keywordsCache;
     static QSet<QString> m_jsIdsCache;
     static QSet<QString> m_qmlIdsCache;
