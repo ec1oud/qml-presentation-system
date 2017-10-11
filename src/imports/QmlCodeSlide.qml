@@ -41,7 +41,7 @@
 
 import QtQuick 2.5
 
-CodeSlide {
+HighlightingCodeSlide {
     id: slide
 
     property real horizontalMargin: 6

@@ -117,6 +117,7 @@ Slide {
 
         TextEdit {
             id: editor
+            enabled: false
             anchors.fill: parent;
             focus: true
             text: code
