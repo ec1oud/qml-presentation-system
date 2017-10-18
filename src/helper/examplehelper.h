@@ -51,11 +51,13 @@ class ExampleHelper: public QObject
     Q_PROPERTY(QString content READ content NOTIFY contentChanged)
     Q_PROPERTY(QString contentWithoutComments READ contentWithoutComments NOTIFY contentChanged)
     Q_PROPERTY(QString sourcePath READ sourcePath NOTIFY sourcePathChanged)
+    Q_PROPERTY(QUrl sourceUrl READ sourceUrl NOTIFY sourcePathChanged)
     Q_PROPERTY(QString qtSourceModule READ qtSourceModule WRITE setQtSourceModule NOTIFY qtSourceModuleChanged)
 
 public:
     QString source() const { return m_source; }
     QString sourcePath() const { return m_sourcePath; }
+    QUrl sourceUrl() const { return QUrl::fromLocalFile(m_sourcePath); }
     QString content() const { return m_content; }
     QString contentWithoutComments() const { return m_contentWithoutComments; }
     QString qtSourceModule() const { return m_qtSourceModule; }

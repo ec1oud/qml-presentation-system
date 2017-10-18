@@ -53,6 +53,6 @@ HighlightingCodeSlide {
         anchors.fill: expandContent ? parent : undefined
         anchors.right: expandContent ? undefined : parent.right
         anchors.rightMargin: -horizontalMargin
-        source: slide.visible ? __helper.sourcePath : ""
+        source: slide.visible ? __helper.sourceUrl : ""
     }
 }
