@@ -325,6 +325,7 @@ fieldOfView
 fileUrl
 fileUrls
 fill
+fillColor
 fillHeight
 fillMode
 fillRule
@@ -380,6 +381,7 @@ front
 gain
 gamma
 genre
+gesturePolicy
 gestures
 globalAlpha
 globalCompositeOperation
@@ -543,6 +545,7 @@ lockStatus
 log
 logicalPixelDensity
 longitudeValid
+longPressThreshold
 looping
 loops
 loopsRemaining
@@ -725,6 +728,7 @@ pmText
 point1
 point2
 pointCount
+pointDistanceThreshold
 pointId
 pointSize
 populate
@@ -946,7 +950,9 @@ strength
 strikeOutPosition
 strikeout
 stringData
+strokeColor
 strokeStyle
+strokeWidth
 style
 styleColor
 subTitle
@@ -1084,6 +1090,7 @@ wordSpacing
 wrapMode
 writer
 x
+xAxis
 xDeformationVectorX
 xDeformationVectorY
 xHeight
@@ -1095,6 +1102,7 @@ xVariation
 xVector
 xml
 y
+yAxis
 yDeformationVectorX
 yDeformationVectorY
 yPosition

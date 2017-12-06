@@ -100,6 +100,7 @@ DistanceSensor
 DoubleValidator
 Drag
 DragEvent
+DragHandler
 DropArea
 DropShadow
 EditorialModel
@@ -199,6 +200,7 @@ MenuItem
 MenuSeparator
 MenuStyle
 MessageDialog
+MomentumAnimation
 MouseArea
 MouseEvent
 MultiPointTouchArea
@@ -237,6 +239,7 @@ PathCurve
 PathElement
 PathInterpolator
 PathLine
+PathMove
 PathPercent
 PathQuad
 PathSvg
@@ -246,6 +249,7 @@ Picture
 PieMenu
 PinchArea
 PinchEvent
+PinchHandler
 Place
 PlaceAttribute
 PlaceSearchModel
@@ -254,6 +258,7 @@ PlayVariation
 Plugin
 PluginParameter
 PointDirection
+PointHandler
 PointLight
 Position
 PositionSource
@@ -311,6 +316,7 @@ Settings
 ShaderEffect
 ShaderEffectSource
 Shape
+ShapePath
 SignalSpy
 Slider
 SliderStyle
@@ -346,6 +352,7 @@ TabViewStyle
 TableView
 TableViewColumn
 TableViewStyle
+TapHandler
 TapReading
 TapSensor
 TargetDirection
