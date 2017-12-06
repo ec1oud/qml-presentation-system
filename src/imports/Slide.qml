@@ -70,6 +70,8 @@ Item {
     property variant content: []
     property string centeredText
     property alias centeredTextFormat: centeredId.textFormat
+    property alias centeredTextStyle: centeredId.style
+    property alias centeredTextStyleColor: centeredId.styleColor
     property string writeInText;
     property string notes;
 
