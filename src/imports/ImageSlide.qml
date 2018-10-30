@@ -46,11 +46,14 @@ Slide {
 
     property alias source: image.source
     property bool autoScale: false
+    property bool fullScreen: false
 
     Image {
         id: image
         anchors.centerIn: slide.autoScale ? undefined : parent
         anchors.fill: slide.autoScale ? parent : undefined
+        anchors.margins: fullScreen ? 0 : 20
+        anchors.topMargin: fullScreen ? 0 : 100
         fillMode: Image.PreserveAspectFit
     }
 }
