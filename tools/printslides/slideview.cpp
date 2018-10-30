@@ -51,6 +51,7 @@ SlideView::SlideView(QWindow* parent): QQuickView(parent),
 m_slidesLeft(0), m_printedSlides(0) {
     connect (this, SIGNAL(statusChanged(QQuickView::Status)),
         this, SLOT(updateStatus(QQuickView::Status)));
+    setResizeMode(SizeViewToRootObject);
 }
 
 void SlideView::updateStatus(QQuickView::Status status) {
@@ -62,16 +63,23 @@ void SlideView::updateStatus(QQuickView::Status status) {
         qWarning("Warning: Superclass appears to not be a Presentation: %s. ", superClass.toLocal8Bit().constData());
     }
     else qDebug() << "Found qml Presentation as rootObject";
+    qDebug() << "initial size" << ri->size();
 
     ri->setProperty("allowDelay", QVariant(false));//Disable partial reveals on slide pages
     QList<QVariant> slides = ri->property("slides").toList();
     m_slidesLeft = slides.size();
+    m_printer.setResolution(300);
+    QSizeF pagesize = m_printer.pageSizeMM();
+    pagesize.setHeight(pagesize.width() * 1920 / 1080);
+    m_printer.setPageSizeMM(pagesize);
     qDebug() << "SlideCount: " << m_slidesLeft;
     qDebug() << "Printer's Page rect size (and suggested resolution of your presentation): " << m_printer.pageRect().size();
     m_printer.setOrientation(QPrinter::Landscape);
     m_printer.setFullPage(true);
     m_printer.setOutputFileName("slides.pdf");
     m_painter.begin(&m_printer);
+
+qDebug() << "initial print resolution" << m_printer.resolution() << "size" << m_printer.pageRect() << m_printer.pageSize();
 
     // it would be better if we used the printer resolution here and forced
     // the presentation to be in the same resolution but when I try that,
@@ -90,7 +98,9 @@ void SlideView::updateStatus(QQuickView::Status status) {
     m_tid = startTimer(2000);
 }
 
-void SlideView::timerEvent(QTimerEvent*) {
+void SlideView::timerEvent(QTimerEvent* ev) {
+    if (ev->timerId() != m_tid)
+        return;
     printCurrentSlide();
     ++m_printedSlides;
     --m_slidesLeft;

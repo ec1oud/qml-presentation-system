@@ -41,6 +41,7 @@
 
 
 #include <QtGui>
+#include <QQuickItem>
 #include "slideview.h"
 
 /** PrintSlides main program.
@@ -67,5 +68,6 @@ int main (int argc, char* argv[]) {
     }
     mainView.setSource(app.arguments()[1]);
     mainView.show();
+    qDebug() << "after show: size" << mainView.size() << mainView.contentItem()->size() << mainView.contentItem()->implicitWidth()<< mainView.contentItem()->implicitHeight();
     return app.exec();
 }
