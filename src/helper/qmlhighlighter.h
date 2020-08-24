@@ -19,6 +19,7 @@
 #ifndef QMLHIGHLIGHTER_H
 #define QMLHIGHLIGHTER_H
 
+#include <QSet>
 #include <QSyntaxHighlighter>
 #include <QTextStream>
 
