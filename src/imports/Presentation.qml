@@ -57,6 +57,7 @@ Item {
     property bool keyShortcutsEnabled: true
 
     property color titleColor: textColor;
+    property real titleMargin: 20
     property color textColor: "black"
     property string fontFamily: "Helvetica"
     property real fontScale: 1

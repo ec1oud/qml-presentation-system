@@ -91,6 +91,7 @@ Item {
     property real masterHeight: parent.height
 
     property color titleColor: parent.titleColor;
+    property real titleMargin: parent.titleMargin
     property color textColor: parent.textColor;
     property string fontFamily: parent.fontFamily;
     property int textFormat: Text.PlainText
@@ -105,6 +106,7 @@ Item {
         text: title;
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
+        anchors.topMargin: parent.titleMargin
         font.bold: true;
         font.family: slide.fontFamily
         color: slide.titleColor
