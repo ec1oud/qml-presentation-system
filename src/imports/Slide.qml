@@ -153,7 +153,7 @@ Item {
                 running: slide.visible && parent.visible && slide.writeInText.length > 0
             }
 
-            visible: slide.writeInText != undefined;
+            visible: slide.writeInText != "";
         }
 
         Column {

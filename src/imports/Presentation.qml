@@ -71,7 +71,8 @@ Item {
     Component.onCompleted: {
         var slideCount = 0;
         var slides = [];
-        for (var i=0; i<root.children.length; ++i) {
+        var i = 0;
+        for (; i<root.children.length; ++i) {
             var r = root.children[i];
             if (r.isSlide) {
                 slides.push(r);
@@ -83,7 +84,7 @@ Item {
 
         // Take the first argument which can be parsed as a number and set the first slide
         // so e.g.  qml slides.qml -- 4  will start on slide 4 (starting with 1)
-        for (var i = 0; i < Qt.application.arguments.length; ++i) {
+        for (i = 0; i < Qt.application.arguments.length; ++i) {
             var num = parseInt(Qt.application.arguments[i])
             if (!isNaN(num)) {
                 currentSlide = Math.min(Math.max(0, num - 1), root.slides.length - 1)
@@ -144,7 +145,7 @@ Item {
         if (event.key >= Qt.Key_0 && event.key <= Qt.Key_9)
             _userNum = 10 * _userNum + (event.key - Qt.Key_0)
         else {
-            if (event.key == Qt.Key_Return || event.key == Qt.Key_Enter)
+            if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter)
                 goToUserSlide();
             _userNum = 0;
         }
@@ -230,7 +231,7 @@ Item {
                             var beginNewLine = false
                             for (var i=0; i<lines.length; ++i) {
                                 var line = lines[i].trim();
-                                if (line.length == 0) {
+                                if (line.length === 0) {
                                     beginNewLine = true;
                                 } else {
                                     if (beginNewLine && result.length) {
