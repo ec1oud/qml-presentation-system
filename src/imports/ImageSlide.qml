@@ -54,6 +54,7 @@ Slide {
         anchors.fill: slide.autoScale ? parent : undefined
         anchors.margins: fullScreen ? 0 : 20
         anchors.topMargin: fullScreen ? 0 : 100
+        sourceSize.width: width
         fillMode: Image.PreserveAspectFit
     }
 }
