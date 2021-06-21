@@ -69,17 +69,16 @@ void SlideView::updateStatus(QQuickView::Status status) {
     QList<QVariant> slides = ri->property("slides").toList();
     m_slidesLeft = slides.size();
     m_printer.setResolution(300);
-    QSizeF pagesize = m_printer.pageSizeMM();
-    pagesize.setHeight(pagesize.width() * 1920 / 1080);
-    m_printer.setPageSizeMM(pagesize);
+    m_printer.setPageSize(QPageSize::A4);
+    m_printer.setPageMargins({7, 7, 7, 7}, QPageLayout::Millimeter);
+    m_printer.setPageOrientation(QPageLayout::Landscape);
     qDebug() << "SlideCount: " << m_slidesLeft;
-    qDebug() << "Printer's Page rect size (and suggested resolution of your presentation): " << m_printer.pageRect().size();
-    m_printer.setOrientation(QPrinter::Landscape);
-    m_printer.setFullPage(true);
+    qDebug() << "Printer's Page rect size (and suggested resolution of your presentation): "
+             << m_printer.pageRect(QPrinter::DevicePixel).size();
     m_printer.setOutputFileName("slides.pdf");
     m_painter.begin(&m_printer);
 
-qDebug() << "initial print resolution" << m_printer.resolution() << "size" << m_printer.pageRect() << m_printer.pageSize();
+qDebug() << "initial print resolution" << m_printer.resolution() << "size" << m_printer.pageRect(QPrinter::DevicePixel);
 
     // it would be better if we used the printer resolution here and forced
     // the presentation to be in the same resolution but when I try that,
@@ -117,12 +116,11 @@ void SlideView::timerEvent(QTimerEvent* ev) {
 
 }
 
-
 void SlideView::printCurrentSlide() {
     QImage pix = grabWindow();
     qDebug() << "Printing slide#" << m_printedSlides + 1 << "Resolution:" << pix.size();
 
-    QRect pageRect = m_printer.pageRect();
+    auto pageRect = m_printer.pageRect(QPrinter::DevicePixel);
     QSize targetSize = pix.size();
     targetSize.scale(pageRect.width(), pageRect.height(), Qt::KeepAspectRatio);
 
