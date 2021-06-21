@@ -126,6 +126,20 @@ Slide {
         }
     }
 
+    Rectangle {
+        id: verticalScrollDecorator
+        anchors.right: parent.right
+        anchors.margins: slide.margins
+        color: "cyan"
+        border.color: "black"
+        border.width: 1
+        width: 5
+        radius: 2
+        antialiasing: true
+        height: flick.height * (flick.height / flick.contentHeight) - (width - anchors.margins) * 2
+        y: (flick.contentY - flick.originY) * (flick.height / flick.contentHeight)
+    }
+
     SyntaxHighlighter {
         id: syntaxHighlighter
 
