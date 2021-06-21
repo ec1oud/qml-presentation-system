@@ -45,6 +45,7 @@ HighlightingCodeSlide {
     id: slide
 
     property real horizontalMargin: 6
+    property real verticalMargin: 6
     property bool expandContent: false
 
     Loader {
@@ -52,7 +53,9 @@ HighlightingCodeSlide {
         focus: true
         anchors.fill: expandContent ? parent : undefined
         anchors.right: expandContent ? undefined : parent.right
+        anchors.top: expandContent ? undefined : parent.top
         anchors.rightMargin: -horizontalMargin
+        anchors.topMargin: verticalMargin
         source: slide.visible ? __helper.sourceUrl : ""
     }
 }
