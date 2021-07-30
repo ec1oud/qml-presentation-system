@@ -67,41 +67,9 @@ ShaderEffect {
 
     property variant colorTable: ShaderEffectSource { sourceItem: Rectangle { width: 4; height: 4; color: "steelblue" } }
 
-    fragmentShader: "
-    uniform lowp float qt_Opacity;
-    uniform lowp sampler2D colorTable;
-    varying highp vec2 qt_TexCoord0;
+    fragmentShader: "swirl.frag.qsb"
 
-    void main() {
-        gl_FragColor = texture2D(colorTable, qt_TexCoord0);
-        gl_FragColor.w *= qt_Opacity;
-    }
-    "
-
-    vertexShader: "
-    uniform lowp vec4 d;
-    uniform highp float tx;
-    uniform highp float ty;
-    uniform highp float tz;
-    uniform highp float tw;
-    uniform highp float amplitude;
-    uniform highp mat4 qt_Matrix;
-    attribute highp vec4 qt_Vertex;
-    attribute highp vec2 qt_MultiTexCoord0;
-    varying highp vec2 qt_TexCoord0;
-
-    void main() {
-        highp vec4 pos = qt_Vertex;
-
-        highp float y1 = sin(tx + d.x * qt_MultiTexCoord0.x * 17. + 2. * d.y) + sin(ty + d.z * qt_MultiTexCoord0.x * 11. + 5. * d.w);
-        highp float y2 = sin(tz + d.w * qt_MultiTexCoord0.x * 7. + 3. * d.z) + sin(tw + d.y * qt_MultiTexCoord0.x * 19. + 3. * d.x);
-
-        pos.y += mix(y1, y2, qt_MultiTexCoord0.y) * amplitude * 0.5;
-
-        gl_Position = qt_Matrix * pos;
-        qt_TexCoord0 = qt_MultiTexCoord0;
-    }
-    "
+    vertexShader: "swirl.vert.qsb"
 
     mesh: GridMesh { resolution: Qt.size(width / 10, 4) }
 
