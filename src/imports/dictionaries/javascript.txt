@@ -1,3 +1,4 @@
+toFixed
 Array
 E
 Function

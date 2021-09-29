@@ -36,6 +36,7 @@ quaternion
 real
 rect
 return
+rgba
 signal
 size
 string
