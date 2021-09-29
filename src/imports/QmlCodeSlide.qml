@@ -47,6 +47,7 @@ HighlightingCodeSlide {
     property real horizontalMargin: 6
     property real verticalMargin: 6
     property bool expandContent: false
+    property alias loadedItem: loader.item
 
     Loader {
         id: loader
