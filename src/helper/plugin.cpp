@@ -42,6 +42,7 @@
 #include <QtQml/qqmlextensionplugin.h>
 
 #include "examplehelper.h"
+#include "pointingfilter.h"
 #include "syntaxhighlighter.h"
 
 QT_BEGIN_NAMESPACE
@@ -58,9 +59,11 @@ public:
 
     void registerTypes(const char *uri) override
     {
+        qDebug() << "registering stuff for" << uri;
         Q_ASSERT(QLatin1String(uri) == QLatin1String("Qt.labs.presentation.helper"));
         Q_UNUSED(uri);
         qmlRegisterType<ExampleHelper>(uri, 1, 0, "ExampleHelper");
+        qmlRegisterType<PointingFilter>(uri, 1, 0, "PointingFilter");
         qmlRegisterType<SyntaxHighlighter>(uri, 1, 0, "SyntaxHighlighter");
     }
 };
