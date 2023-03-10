@@ -1,3 +1,4 @@
+MODULE_BASE_OUTDIR=$$[QT_INSTALL_QML]
 TARGETPATH=Qt/labs/presentation
 
 QML_FILES = \

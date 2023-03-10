@@ -1,5 +1,6 @@
 CXX_MODULE = qml
 TARGET  = examplehelper
+MODULE_BASE_OUTDIR=$$[QT_INSTALL_QML]
 TARGETPATH=Qt/labs/presentation/helper
 IMPORT_VERSION = 1.0
 
