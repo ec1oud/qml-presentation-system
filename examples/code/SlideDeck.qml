@@ -72,4 +72,24 @@ Presentation {
             }
         "
     }
+
+    MarkdownSlide {
+        title: "MarkdownSlide {} Element"
+        text: "
+The body of the slide is a Text object to show Markdown.
+So all the usual Qt Markdown features are supported.
+
+- bullet points
+  + nested ones
+- [ ] check lists
+
+ordinary paragraphs with *italics*, **bold**, _underlines_, ...
+
+> block quotes
+
+```
+code block, with fixed font
+```
+"
+    }
 }

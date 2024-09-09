@@ -3,6 +3,7 @@ HighlightingCodeSlide 1.0 HighlightingCodeSlide.qml
 ImageSlide 1.0 ImageSlide.qml
 LiveCode 1.0 LiveCode.qml
 LiveCodeSlide 1.0 LiveCodeSlide.qml
+MarkdownSlide 1.0 MarkdownSlide.qml
 PaletteLoader 1.0 PaletteLoader.qml
 Presentation 1.0 Presentation.qml
 QmlCodeSlide 1.0 QmlCodeSlide.qml

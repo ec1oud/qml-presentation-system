@@ -8,6 +8,7 @@ QML_FILES = \
     ImageSlide.qml \
     LiveCode.qml \
     LiveCodeSlide.qml \
+    MarkdownSlide.qml \
     PaletteLoader.qml \
     palettes/CutePalette.qml \
     palettes/DarkPalette.qml \
