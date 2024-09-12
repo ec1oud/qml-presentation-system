@@ -1,0 +1,7 @@
+From Qt6 and onwards, shaders needs to be written in separates files using Vulkan-compatible GLSL code, and then compiled using Qt's new "qsb" tool. 
+
+For example, to make this example work you need to build its shaders like this:
+
+~/Qt/6.2.0/gcc_64/bin/qsb --glsl 100es,120,150 --hlsl 50 --msl 12 -o swirl.frag.qsb swirl.frag
+~/Qt/6.2.0/gcc_64/bin/qsb --glsl 100es,120,150 --hlsl 50 --msl 12 -o swirl.vert.qsb swirl.vert
+
